@@ -2,26 +2,23 @@
 
 import Service.ConsumoAPI;
 import Service.ConvierteDatos;
-
-import java.io.IOException;
-
 import java.util.Scanner;
 
 public class Main {
     static final String apiKey= "971f0df7f49e0be605c02c0b";
-    private static Scanner sc= new Scanner(System.in);
-    private static ConsumoAPI consumoAPI= new ConsumoAPI();
-    private static ConvierteDatos conversor= new ConvierteDatos();
+    private static final Scanner sc= new Scanner(System.in);
+    private static final ConsumoAPI consumoAPI= new ConsumoAPI();
+    private static final ConvierteDatos conversor= new ConvierteDatos();
     private static final String URL_Base= "https://v6.exchangerate-api.com/v6/";
 
-    public static void main(String[] args) throws IOException, InterruptedException {
+    public static void main(String[] args)  {
 
         menu();
 
 
     }
 
-    private static void menu() throws IOException, InterruptedException {
+    private static void menu() {
         var option= -1;
         while (option!=7){
             var menu= """
@@ -65,49 +62,49 @@ public class Main {
 
     }
 
-    private static void convertirPesoColombianoADolar() throws IOException, InterruptedException {
+    private static void convertirPesoColombianoADolar()  {
         Moneda moneda= getDatos("COP", "USD");
         System.out.println("El cambio actual esta a "+moneda.getConversion_rate()+" de " +moneda.getTarget_code()+" por Peso Colombiano");
         System.out.println("El valor ingresado en pesos, corresponde al valor final de "+moneda.getConversion_result()+" "+moneda.getTarget_code());
 
     }
 
-    private static void convertirDolarAPesoColombiano() throws IOException, InterruptedException {
+    private static void convertirDolarAPesoColombiano()  {
         Moneda moneda= getDatos("USD", "COP");
-        System.out.println("El cambio actual esta a "+moneda.getConversion_rate()+moneda.getTarget_code()+" por dolar");
+        System.out.println("El cambio actual esta a "+moneda.getConversion_rate()+" de " +moneda.getTarget_code()+" por dolar");
         System.out.println("El valor ingresado en dolares, corresponde al valor final de "+moneda.getConversion_result() +" "+moneda.getTarget_code());
 
 
     }
 
-    private static void convertirRealBrasileroADolar() throws IOException, InterruptedException {
+    private static void convertirRealBrasileroADolar()  {
         Moneda moneda= getDatos("BRL", "USD");
         System.out.println("El cambio actual esta a "+moneda.getConversion_rate()+" de " +moneda.getTarget_code()+" por Reales Brasileros");
         System.out.println("El valor ingresado en reales, corresponde al valor final de "+moneda.getConversion_result()+" "+moneda.getTarget_code());
 
     }
 
-    private static void convertirDolarARealBrasilero() throws IOException, InterruptedException {
+    private static void convertirDolarARealBrasilero()  {
         Moneda moneda= getDatos("USD", "BRL");
-        System.out.println("El cambio actual esta a "+moneda.getConversion_rate()+moneda.getTarget_code()+" por dolar");
+        System.out.println("El cambio actual esta a "+moneda.getConversion_rate()+" de " +moneda.getTarget_code()+" por dolar");
         System.out.println("El valor ingresado en dolares, corresponde al valor final de "+moneda.getConversion_result()+" "+moneda.getTarget_code());
     }
 
-    private static void convertirPesoArgentinoADolar() throws IOException, InterruptedException {
+    private static void convertirPesoArgentinoADolar()  {
         Moneda moneda= getDatos("ARS", "USD");
         System.out.println("El cambio actual esta a "+moneda.getConversion_rate()+" de " +moneda.getTarget_code()+" por Peso Argentino");
         System.out.println("El valor ingresado en pesos, corresponde al valor final de "+moneda.getConversion_result()+" "+moneda.getTarget_code());
     }
 
-    private static void convertirDolarAPesoArgentino() throws IOException, InterruptedException {
+    private static void convertirDolarAPesoArgentino() {
         Moneda moneda= getDatos("USD", "ARS");
-        System.out.println("El cambio actual esta a "+moneda.getConversion_rate()+moneda.getTarget_code()+" por dolar");
+        System.out.println("El cambio actual esta a "+moneda.getConversion_rate()+" de "+moneda.getTarget_code()+" por dolar");
         System.out.println("El valor ingresado en dolares, corresponde al valor final de "+moneda.getConversion_result()+" "+moneda.getTarget_code());
 
     }
 
 
-    private static Moneda getDatos(String base, String destino) throws IOException, InterruptedException {
+    private static Moneda getDatos(String base, String destino) {
         System.out.println("Ingrese la cantidad de dinero que quiera convertir");
         var mount= sc.nextDouble();
         var json= consumoAPI.ObtenerDatos(URL_Base+apiKey+"/pair/"+base+"/"+destino+"/"+mount);

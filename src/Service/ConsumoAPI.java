@@ -7,12 +7,17 @@ import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 
 public class ConsumoAPI {
-    public String ObtenerDatos(String url) throws IOException, InterruptedException {
+    public String ObtenerDatos(String url)  {
         HttpClient client= HttpClient.newHttpClient();
         HttpRequest request= HttpRequest.newBuilder()
                 .uri(URI.create(url))
                 .build();
-        HttpResponse<String> response= client.send(request, HttpResponse.BodyHandlers.ofString());
+        HttpResponse<String> response= null;
+        try {
+            response = client.send(request, HttpResponse.BodyHandlers.ofString());
+        } catch (IOException | InterruptedException e) {
+            throw new RuntimeException(e);
+        }
 
         String json= response.body();
 
